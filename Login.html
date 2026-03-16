@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Roots of Change</title>
+    <link rel="stylesheet" href="project.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Background image will be set dynamically by JavaScript slider */
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Professional Header */
+        #roc {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px auto;
+            width: fit-content;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            animation: slideDown 1s ease-out;
+        }
+
+        #roc img {
+            opacity: 1;
+            display: block;
+            margin: 0 auto;
+            width: 400px;
+            height: 100px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        #navbar {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+            backdrop-filter: blur(15px);
+            border-radius: 0 0 20px 20px;
+            padding: 15px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        #navbar a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header-section h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-section p {
+            font-size: 1.3em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Auth Container */
+        .auth-wrapper {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4CAF50, #81C784, #4CAF50);
+            animation: borderGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .auth-wrapper h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-wrapper p.subtitle {
+            margin: 0 0 30px;
+            font-size: 1.1em;
+            text-align: center;
+            color: #555;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-wrapper label {
+            display: block;
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .auth-wrapper input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .auth-wrapper input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .auth-wrapper button.primary {
+            width: 100%;
+            margin-top: 30px;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: #ffffff;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .auth-wrapper button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+        }
+
+        .auth-toggle {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .auth-toggle a {
+            color: #4CAF50;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .auth-toggle a:hover {
+            color: #2E7D32;
+            text-decoration: underline;
+        }
+
+        .auth-message {
+            margin-top: 20px;
+            font-size: 1.1em;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .auth-message.error {
+            color: #c0392b;
+            background: rgba(192, 57, 43, 0.1);
+            border: 1px solid rgba(192, 57, 43, 0.3);
+        }
+
+        .auth-message.success {
+            color: #27ae60;
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-section h2 {
+                font-size: 2.5em;
+            }
+            
+            .header-section p {
+                font-size: 1.1em;
+            }
+            
+            .auth-wrapper {
+                padding: 30px 20px;
+                margin: 0 20px 40px;
+            }
+            
+            #navbar {
+                padding: 12px 20px;
+            }
+            
+            #navbar a {
+                margin: 5px 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-section {
+                padding: 30px 20px;
+            }
+            
+            .header-section h2 {
+                font-size: 2em;
+            }
+            
+            .auth-wrapper {
+                padding: 25px 15px;
+                margin: 0 15px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="roc">
+        <img src="logo.png" alt="Roots of Change">
+    </div>
+    <div id="navbar" class="nav">
+        <a href="index.html">Home</a>
+        <a href="SellLand.html">Sell Land</a>
+        <a href="CropMarketplace.html">Crop Marketplace</a>
+        <a href="Fertilizers.html">Fertilizers</a>
+        <a href="GovtSchems.html">Govt Schemes</a>
+        <a href="PlantDisease.html">Plant Disease CNN</a>
+        <a href="Login.html">Login</a>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h2>🔐 Login to Roots of Change</h2>
+            <p>Access your agricultural dashboard and manage your farming operations with our comprehensive platform</p>
+        </div>
+        
+        <!-- Login Form -->
+        <div class="auth-wrapper">
+            <h2 id="auth-title">Login</h2>
+            <p class="subtitle" id="auth-subtitle">Login to access Roots of Change features.</p>
+
+            <form id="auth-form">
+                <label for="auth-username">👤 Username</label>
+                <input type="text" id="auth-username" placeholder="Enter your username" required>
+
+                <label for="auth-password">🔒 Password</label>
+                <input type="password" id="auth-password" placeholder="Enter your password" required>
+
+                <button type="submit" class="primary" id="auth-submit-btn">🚀 Login</button>
+            </form>
+
+            <div class="auth-toggle" id="auth-toggle">
+                New here? <a id="switch-to-register">Create an account</a>
+            </div>
+
+            <div class="auth-message" id="auth-message"></div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+    <script>
+        // Sliding background like home page: cycle through key images
+        (function () {
+            const images = [
+                'about3.avif',
+                'selllands.jpg',
+                'fertilizers.jpg',
+                'Govtschemess.jpg',
+                'animalss.jpg',
+                'logo.png'
+            ];
+
+            let index = 0;
+
+            function updateBackground() {
+                const img = images[index];
+                document.body.style.backgroundImage =
+                    "linear-gradient(135deg, rgba(102, 126, 234, 0.75), rgba(118, 75, 162, 0.75)), url('" + img + "')";
+                index = (index + 1) % images.length;
+            }
+
+            // Start immediately and then every 5 seconds
+            updateBackground();
+            setInterval(updateBackground, 5000);
+        })();
+    </script>
+</body>
+</html>
+
