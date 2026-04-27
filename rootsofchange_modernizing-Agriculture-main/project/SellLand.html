@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Land - Roots of Change</title>
+    <link rel="stylesheet" href="project.css">
+    <script>
+        (function () {
+            if (!localStorage.getItem("roc_current_user")) {
+                window.location.href = "Login.html";
+            }
+        })();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)),
+                        url('selllands.jpg') center/cover no-repeat fixed;
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Professional Header */
+        #roc {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px auto;
+            width: fit-content;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            animation: slideDown 1s ease-out;
+        }
+
+        #roc img {
+            opacity: 1;
+            display: block;
+            margin: 0 auto;
+            width: 400px;
+            height: 100px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        #navbar {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+            backdrop-filter: blur(15px);
+            border-radius: 0 0 20px 20px;
+            padding: 15px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        #navbar a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        #navbar a:nth-child(2) {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header-section h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-section p {
+            font-size: 1.3em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4CAF50, #81C784, #4CAF50);
+            animation: borderGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        /* Land Details Display */
+        .land-details-container {
+            margin-top: 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: white;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .land-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .land-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .land-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4CAF50, #81C784, #4CAF50);
+        }
+
+        .land-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .land-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #4CAF50;
+            font-weight: 700;
+        }
+
+        .land-card p {
+            margin-bottom: 12px;
+            font-size: 1em;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .land-card strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-section h2 {
+                font-size: 2.5em;
+            }
+            
+            .header-section p {
+                font-size: 1.1em;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .land-list {
+                grid-template-columns: 1fr;
+            }
+            
+            #navbar {
+                padding: 12px 20px;
+            }
+            
+            #navbar a {
+                margin: 5px 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-section {
+                padding: 30px 20px;
+            }
+            
+            .header-section h2 {
+                font-size: 2em;
+            }
+            
+            .btn-submit {
+                padding: 15px 40px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="roc">
+        <img src="logo.png" alt="Roots of Change">
+    </div>
+    <div id="navbar" class="nav">
+        <a href="index.html">Home</a>
+        <a href="SellLand.html">Sell Land</a>
+        <a href="CropMarketplace.html">Crop Marketplace</a>
+        <a href="Fertilizers.html">Fertilizers</a>
+        <a href="GovtSchems.html">Govt Schemes</a>
+        <a href="PlantDisease.html">Plant Disease CNN</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h2>🏞️ Sell Your Land</h2>
+            <p>List your agricultural land for sale. Fill in the details below to reach potential buyers and get the best value for your property.</p>
+        </div>
+        
+        <!-- Form Container -->
+        <div class="form-container">
+            <form id="landForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="passbookNumber">📋 Passbook Number</label>
+                        <input type="text" id="passbookNumber" name="passbookNumber" placeholder="Enter land passbook number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="personName">👤 Person Name</label>
+                        <input type="text" id="personName" name="personName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobileNumber">📱 Mobile Number</label>
+                        <input type="text" id="mobileNumber" name="mobileNumber" placeholder="Enter your mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">📍 Location</label>
+                        <input type="text" id="location" name="location" placeholder="Enter land location (city/district)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="landType">🌾 Type of Land</label>
+                        <input type="text" id="landType" name="landType" placeholder="e.g., Agricultural, Fertile, Irrigated" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="acres">📏 Number of Acres</label>
+                        <input type="number" id="acres" name="acres" placeholder="Enter land area in acres" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">🚀 Submit Land Listing</button>
+            </form>
+        </div>
+    
+        <!-- Land Details Display -->
+        <div class="land-details-container">
+            <h2 class="section-title">📋 Listed Lands</h2>
+            <div id="displayDetails" class="land-list"></div>
+        </div>
+    </div>
+    
+    <script>
+        function logout() {
+            localStorage.removeItem("roc_current_user");
+            window.location.href = "Login.html";
+        }
+
+        document.getElementById('landForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+        
+            // Get form values
+            var passbookNumber = document.getElementById('passbookNumber').value;
+            var personName = document.getElementById('personName').value;
+            var mobileNumber = document.getElementById('mobileNumber').value;
+            var location = document.getElementById('location').value;
+            var landType = document.getElementById('landType').value;
+            var acres = document.getElementById('acres').value;
+        
+            // Data validation
+            var nameRegex = /^[a-zA-Z\s]+$/;
+            var mobileRegex = /^\d{10}$/;
+            var integerRegex = /^\d+$/;
+        
+            if (!nameRegex.test(personName)) {
+                showNotification("Please enter a valid name.", "error");
+                return;
+            }
+        
+            if (!mobileRegex.test(mobileNumber)) {
+                showNotification("Please enter a valid 10-digit mobile number.", "error");
+                return;
+            }
+        
+            if (!integerRegex.test(acres)) {
+                showNotification("Please enter a valid integer for Acres.", "error");
+                return;
+            }
+        
+            // Create land object
+            var land = {
+                passbookNumber: passbookNumber,
+                personName: personName,
+                mobileNumber: mobileNumber,
+                location: location,
+                landType: landType,
+                acres: acres
+            };
+        
+            // Save land details to local storage
+            saveLandDetails(land);
+        
+            // Display all land details
+            displayAllLandDetails();
+        
+            // Reset form fields
+            document.getElementById('landForm').reset();
+            
+            // Show success notification
+            showNotification("Land listed successfully!", "success");
+        });
+        
+        // Function to show notifications
+        function showNotification(message, type) {
+            // Remove existing notifications
+            var existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            var notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                border-radius: 10px;
+                color: white;
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            `;
+            
+            if (type === 'success') {
+                notification.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
+            } else {
+                notification.style.background = 'linear-gradient(135deg, #f44336, #d32f2f)';
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(function() {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(function() {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+        
+        // Add slide animations
+        var style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Function to save land details to local storage
+        function saveLandDetails(land) {
+            // Get existing lands from localStorage or initialize as empty array
+            var lands = JSON.parse(localStorage.getItem('lands')) || [];
+        
+            // Add new land to lands array
+            lands.push(land);
+        
+            // Save updated lands array to localStorage
+            localStorage.setItem('lands', JSON.stringify(lands));
+        }
+        
+        // Function to display all land details
+        function displayAllLandDetails() {
+            var lands = JSON.parse(localStorage.getItem('lands')) || [];
+        
+            var details = '';
+            lands.forEach(function(land, index) {
+                details += `
+                    <div class="land-card">
+                        <h3>🏞️ Land ${index + 1}</h3>
+                        <p><strong>📋 Passbook Number:</strong> ${land.passbookNumber}</p>
+                        <p><strong>👤 Person Name:</strong> ${land.personName}</p>
+                        <p><strong>📱 Mobile Number:</strong> ${land.mobileNumber}</p>
+                        <p><strong>📍 Location:</strong> ${land.location}</p>
+                        <p><strong>🌾 Type of Land:</strong> ${land.landType}</p>
+                        <p><strong>📏 Number of Acres:</strong> ${land.acres}</p>
+                    </div>
+                `;
+            });
+        
+            if (lands.length === 0) {
+                details = `
+                    <div style="text-align: center; padding: 50px; color: white;">
+                        <h3>No lands listed yet</h3>
+                        <p>Be the first to list your agricultural land!</p>
+                    </div>
+                `;
+            }
+        
+            document.getElementById('displayDetails').innerHTML = details;
+        }
+        
+        // Display all land details initially
+        displayAllLandDetails();
+    </script>
+</body>
+</html>
+    

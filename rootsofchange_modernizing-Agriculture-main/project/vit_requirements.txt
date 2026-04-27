@@ -1,0 +1,36 @@
+# Vision Transformer Plant Disease Detection Requirements
+# Replaces CNN with Vision Transformer (ViT) architecture
+
+# Core ML/AI Libraries
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0
+timm>=0.9.0
+
+# Image Processing
+Pillow>=9.5.0
+opencv-python>=4.8.0
+
+# Web Interface
+streamlit>=1.28.0
+
+# Data Processing
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+
+# Utilities
+tqdm>=4.65.0
+python-dotenv>=1.0.0
+
+# Optional: For model training (comment out if only inference)
+# tensorboard>=2.13.0
+# wandb>=0.15.0
+
+# System Requirements
+# Python 3.8+
+# CUDA 11.0+ (for GPU acceleration)

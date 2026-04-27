@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizer Guide - Roots of Change</title>
+    <link rel="stylesheet" href="project.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)),
+                        url('selllands.jpg') center/cover no-repeat fixed;
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Professional Header */
+        #roc {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px auto;
+            width: fit-content;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            animation: slideDown 1s ease-out;
+        }
+
+        #roc img {
+            opacity: 1;
+            display: block;
+            margin: 0 auto;
+            width: 400px;
+            height: 100px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        #navbar {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+            backdrop-filter: blur(15px);
+            border-radius: 0 0 20px 20px;
+            padding: 15px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .welcome-container {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .welcome-container h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            text-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .decorative-line {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #4CAF50, #81C784, #4CAF50);
+            margin: 20px auto;
+            border-radius: 2px;
+            animation: borderGlow 2s ease-in-out infinite;
+        }
+
+        .welcome-container p {
+            font-size: 1.4em;
+            color: #333333;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .fertilizer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .fertilizer-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fertilizer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4CAF50, #81C784, #4CAF50);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .fertilizer-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .fertilizer-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .fertilizer-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(76, 175, 80, 0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .fertilizer-card:hover .fertilizer-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .fertilizer-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 18px;
+            color: #4CAF50;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            transition: color 0.3s ease;
+        }
+
+        .fertilizer-card:hover h3 {
+            color: #2E7D32;
+        }
+
+        .fertilizer-card p {
+            font-size: 0.95em;
+            color: #5d6d7e;
+            line-height: 1.6;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .fertilizer-card:hover p {
+            color: #34495e;
+        }
+
+        .fertilizer-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .fertilizer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(135deg, #45a049, #1b5e20);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-section h2 {
+                font-size: 2.5em;
+            }
+            
+            .header-section p {
+                font-size: 1.1em;
+            }
+            
+            .fertilizer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            #navbar {
+                padding: 12px 20px;
+            }
+            
+            #navbar a {
+                margin: 5px 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-section {
+                padding: 30px 20px;
+            }
+            
+            .header-section h2 {
+                font-size: 2em;
+            }
+            
+            .fertilizer-card {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="roc">
+        <img src="logo.png" alt="Roots of Change">
+    </div>
+    <div id="navbar" class="nav">
+        <a href="index.html">Home</a>
+        <a href="SellLand.html">Sell Land</a>
+        <a href="CropMarketplace.html">Crop Marketplace</a>
+        <a href="Fertilizers.html">Fertilizers</a>
+        <a href="GovtSchems.html">Govt Schemes</a>
+        <a href="PlantDisease.html">Plant Disease CNN</a>
+        <a href="Login.html">Login</a>
+    </div>
+
+    <div class="container">
+        <!-- Welcome Container -->
+        <div class="welcome-container">
+            <h1>🌱 Fertilizer Guide</h1>
+            <div class="decorative-line"></div>
+            <p>Complete guide to agricultural fertilizers, their types, applications, and best practices for optimal crop growth and sustainable farming practices.</p>
+        </div>
+        
+        <!-- Fertilizer Cards -->
+        <div class="fertilizer-grid">
+            <div class="fertilizer-card">
+                <span class="fertilizer-icon">🌿</span>
+                <h3>Nitrogen Fertilizers</h3>
+                <p>Essential for leaf growth and vegetative development. Promotes lush green foliage and vigorous plant growth.</p>
+                <button class="fertilizer-btn" onclick="showFertilizerInfo('nitrogen')">Learn More</button>
+            </div>
+
+            <div class="fertilizer-card">
+                <span class="fertilizer-icon">🌻</span>
+                <h3>Phosphorus Fertilizers</h3>
+                <p>Crucial for root development, flowering, and fruit production. Enhances energy transfer in plants.</p>
+                <button class="fertilizer-btn" onclick="showFertilizerInfo('phosphorus')">Learn More</button>
+            </div>
+
+            <div class="fertilizer-card">
+                <span class="fertilizer-icon">🌾</span>
+                <h3>Potassium Fertilizers</h3>
+                <p>Important for overall plant health, disease resistance, and water regulation. Improves fruit quality.</p>
+                <button class="fertilizer-btn" onclick="showFertilizerInfo('potassium')">Learn More</button>
+            </div>
+
+            <div class="fertilizer-card">
+                <span class="fertilizer-icon">🌱</span>
+                <h3>Organic Fertilizers</h3>
+                <p>Natural alternatives that improve soil structure and provide slow-release nutrients for sustainable farming.</p>
+                <button class="fertilizer-btn" onclick="showFertilizerInfo('organic')">Learn More</button>
+            </div>
+
+            <div class="fertilizer-card">
+                <span class="fertilizer-icon">🌿</span>
+                <h3>Micronutrients</h3>
+                <p>Essential trace elements required in small quantities for various plant functions and enzyme activities.</p>
+                <button class="fertilizer-btn" onclick="showFertilizerInfo('micronutrients')">Learn More</button>
+            </div>
+
+            <div class="fertilizer-card">
+                <span class="fertilizer-icon">🌾</span>
+                <h3>Compound Fertilizers</h3>
+                <p>Balanced NPK formulations providing multiple nutrients in specific ratios for different crop requirements.</p>
+                <button class="fertilizer-btn" onclick="showFertilizerInfo('compound')">Learn More</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = localStorage.getItem('roc_current_user');
+            if (!currentUser) {
+                window.location.href = 'Login.html';
+                return;
+            }
+        });
+
+        function showFertilizerInfo(type) {
+            const fertilizerData = {
+                nitrogen: {
+                    title: "Nitrogen Fertilizers",
+                    description: "Nitrogen is essential for vegetative growth and chlorophyll production.",
+                    types: ["Urea (46% N)", "Ammonium Nitrate (34% N)", "Ammonium Sulfate (21% N)", "Calcium Nitrate (15.5% N)"],
+                    application: "Apply in split doses for better efficiency and reduced losses.",
+                    crops: "Rice, Wheat, Maize, Vegetables"
+                },
+                phosphorus: {
+                    title: "Phosphorus Fertilizers",
+                    description: "Phosphorus is crucial for root development, flowering, and fruit production.",
+                    types: ["Superphosphate (16-20% P)", "Triple Superphosphate (46% P)", "DAP (18% N, 46% P)", "MAP (11% N, 52% P)"],
+                    application: "Apply as basal dose before or at sowing for best results.",
+                    crops: "All crops, especially during early growth stages"
+                },
+                potassium: {
+                    title: "Potassium Fertilizers",
+                    description: "Potassium improves overall plant health, disease resistance, and water regulation.",
+                    types: ["Muriate of Potash (60% K)", "Potassium Sulfate (50% K)", "Potassium Nitrate (13% N, 46% K)"],
+                    application: "Apply as basal dose, split for high-demand crops.",
+                    crops: "Fruits, Vegetables, Cereals, Tubers"
+                },
+                organic: {
+                    title: "Organic Fertilizers",
+                    description: "Natural fertilizers that improve soil structure and provide slow-release nutrients.",
+                    types: ["Farmyard Manure", "Compost", "Vermicompost", "Bone Meal", "Blood Meal"],
+                    application: "Apply 2-3 weeks before sowing for proper decomposition.",
+                    crops: "All crops, especially for organic farming"
+                },
+                micronutrients: {
+                    title: "Micronutrients",
+                    description: "Essential trace elements required in small quantities for various plant functions.",
+                    types: ["Zinc Sulfate", "Iron Chelate", "Manganese Sulfate", "Borax", "Copper Sulfate"],
+                    application: "Apply as foliar spray or soil application based on deficiency symptoms.",
+                    crops: "All crops, based on soil test recommendations"
+                },
+                compound: {
+                    title: "Compound Fertilizers",
+                    description: "Balanced NPK formulations providing multiple nutrients in specific ratios.",
+                    types: ["NPK 19-19-19", "NPK 20-20-20", "NPK 15-15-15", "NPK 10-26-26"],
+                    application: "Apply in split doses based on crop growth stages.",
+                    crops: "General purpose for various crops"
+                }
+            };
+
+            const data = fertilizerData[type];
+            if (!data) return;
+
+            let message = `
+                <h3 style="color: #4CAF50; margin-bottom: 15px;">${data.title}</h3>
+                <p style="margin-bottom: 15px; line-height: 1.6;">${data.description}</p>
+                <strong style="color: #2E7D32;">Common Types:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+            `;
+            
+            data.types.forEach(type => {
+                message += `<li style="margin: 5px 0;">${type}</li>`;
+            });
+            
+            message += `
+                </ul>
+                <strong style="color: #2E7D32;">Application:</strong>
+                <p style="margin: 10px 0; line-height: 1.6;">${data.application}</p>
+                <strong style="color: #2E7D32;">Best for Crops:</strong>
+                <p style="margin: 10px 0; line-height: 1.6;">${data.crops}</p>
+            `;
+
+            // Create modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                max-width: 500px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 1000;
+                font-family: 'Segoe UI', sans-serif;
+            `;
+            
+            modal.innerHTML = message + '<br><button onclick="this.parentElement.remove()" style="background: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 15px;">Close</button>';
+            
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            `;
+            overlay.onclick = () => modal.remove();
+            
+            document.body.appendChild(overlay);
+            document.body.appendChild(modal);
+        }
+
+        function logout() {
+            localStorage.removeItem("roc_current_user");
+            window.location.href = "Login.html";
+        }
+    </script>
+</body>
+</html>
